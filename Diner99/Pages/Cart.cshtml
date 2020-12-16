@@ -1,0 +1,40 @@
+﻿@page
+@model Diner99.Pages.CartModel
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+<h3>Cart</h3>
+<form method="post" asp-page="cart" asp-page-handler="update">
+    <table class="table">
+        <tr>
+            <th>Action</th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Quantity <input type="submit" value="Update" /></th>
+            <th>Sub Total</th>
+        </tr>
+        @foreach (var item in Model.cart)
+        {
+            <tr>
+                <td>
+                    <a asp-page="cart" asp-page-handler="delete" asp-route-id="@item.Cusine.ID">Remove</a>
+                </td>
+                <td>@item.Cusine.ID</td>
+                <td>@item.Cusine.Name</td>
+                <td><img src="~/Images/@item.Cusine.Image" width="120" height="80" /></td>
+                <td>SAR @item.Cusine.Price</td>
+                <td><input type="number" name="quantities" value="@item.Quantity" min="1" style="width: 50px;" /></td>
+                <td>
+                    SAR @(item.Cusine.Price * item.Quantity)
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="6" align="right">Total</td>
+            <td align="center">SAR @Model.Total</td>
+        </tr>
+    </table>
+</form>
+<a asp-page="index">Continue Shopping</a>

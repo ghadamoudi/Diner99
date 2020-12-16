@@ -1,0 +1,53 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome Diner 99</h1>
+    
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Dish[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dish[0].Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dish[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dish[0].Image)
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Dish)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price) SAR
+                </td>
+                <td>
+                    <img src="~/Images/@item.Image" width="120" height="80" />
+                </td>
+                <td>
+                    <a asp-page="./Cart" asp-page-handler="buynow" asp-route-id="@item.ID">Add to Cart</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
